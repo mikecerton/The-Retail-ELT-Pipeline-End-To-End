@@ -1,0 +1,56 @@
+-- Create the fact table
+CREATE TABLE fact_sales (
+    sale_id BIGINT IDENTITY(1, 1) PRIMARY KEY,
+    order_id VARCHAR(20) NOT NULL,
+    product_id VARCHAR(20) NOT NULL,
+    customer_id VARCHAR(20) NOT NULL,
+    region_id INTEGER NOT NULL,
+    sales DECIMAL(10, 2),
+    profit DECIMAL(10, 2),
+    quantity INTEGER,
+    discount DECIMAL(5, 2),
+    ship_mode VARCHAR(50),       -- Ship Mode from dim_orders
+    segment VARCHAR(50),         -- Segment from dim_customers
+    state VARCHAR(50),           -- State from dim_regions
+    region VARCHAR(50),          -- Region from dim_regions
+    category VARCHAR(50),        -- Category from dim_products
+    sub_category VARCHAR(50),    -- Sub-Category from dim_products,
+    FOREIGN KEY (order_id) REFERENCES dim_orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES dim_products(product_id),
+    FOREIGN KEY (customer_id) REFERENCES dim_customers(customer_id),
+    FOREIGN KEY (region_id) REFERENCES dim_regions(region_id)
+);
+
+
+-- Create the orders dimension table
+CREATE TABLE dim_orders (
+    order_id VARCHAR(20) PRIMARY KEY,
+    order_date DATE NOT NULL,
+    ship_date DATE NOT NULL,
+    ship_mode VARCHAR(50)
+);
+
+-- Create the customers dimension table
+CREATE TABLE dim_customers (
+    customer_id VARCHAR(20) PRIMARY KEY,
+    customer_name VARCHAR(100),
+    segment VARCHAR(50)
+);
+
+-- Create the products dimension table
+CREATE TABLE dim_products (
+    product_id VARCHAR(20) PRIMARY KEY,
+    category VARCHAR(50),
+    sub_category VARCHAR(50),
+    product_name VARCHAR(255)
+);
+
+-- Create the regions dimension table
+CREATE TABLE dim_regions (
+    region_id INTEGER IDENTITY(1, 1) PRIMARY KEY,
+    region VARCHAR(50),
+    country VARCHAR(50),
+    state VARCHAR(50),
+    city VARCHAR(100),
+    postal_code VARCHAR(10)
+);
