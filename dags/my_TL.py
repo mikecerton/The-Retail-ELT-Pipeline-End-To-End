@@ -325,3 +325,64 @@ def time_Load():
     finally:
         cursor.close()
         conn.close()
+
+def ftc_profit_Transform():
+
+    load_dotenv("/opt/airflow/my_data/.env")
+
+    data_Fname = "ftc_profit_data.csv"         # change
+    bucket_name = os.getenv("bucket_name")
+
+    session = boto3.Session(
+        aws_access_key_id = os.getenv("aws_access_key_id"),
+        aws_secret_access_key = os.getenv("aws_secret_access_key"),
+        region_name = os.getenv("region_name"))
+
+    s3 = session.client('s3')
+
+    df = pd.read_csv("/opt/airflow/my_data/my_retail_s3.csv")          # changes
+    ftc_profit = df[['Order Date', 'Order ID', 'Customer ID', 'Product ID', 'Postal Code', 'Sales', 'Profit', 'Quantity', 'Discount', 'Segment', 'State', 'Region', 'Category']]
+    ftc_profit.to_csv(data_Fname, index=False)
+
+    with open(data_Fname, "rb") as f:
+        s3.upload_fileobj(f, bucket_name, data_Fname)
+    print("!_upload_to_S3_complete_!")
+
+def ftc_profit_Load():
+
+    load_dotenv("/opt/airflow/my_data/.env")
+
+    data_Fname = "ftc_profit_data.csv"         # change
+    bucket_name = os.getenv("bucket_name")
+
+    conn = psycopg2.connect(
+        host = os.getenv("redshift_host"),
+        port = os.getenv("redshift_port"),
+        dbname = os.getenv("redshift_db"),
+        user = os.getenv("redshift_user"),
+        password = os.getenv("redshift_password")
+    )
+
+    table_name = "fact_profit_rep"          # change
+    s3_path = f"s3://{bucket_name}/{data_Fname}"
+    iam_role = os.getenv("iam_role")
+
+    copy_query = f"""
+    COPY {table_name}
+    FROM '{s3_path}'
+    IAM_ROLE '{iam_role}'
+    CSV
+    IGNOREHEADER 1;
+    """
+
+    cursor = conn.cursor()
+    try:
+        cursor.execute(copy_query)
+        conn.commit()
+        print("Data loaded successfully into table!")
+    except Exception as e:
+        conn.rollback()
+        print(f"Error loading data into table: {e}")
+    finally:
+        cursor.close()
+        conn.close()

@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from raw_data_func import upload_s3, download_s3_clean
 
 
-from my_TL import location_Transform, location_Load, product_Transform, product_Load, customer_Transform, customer_Load, order_Transform, order_Load, time_Transform, time_Load
+from my_TL import location_Transform, location_Load, product_Transform, product_Load, customer_Transform, customer_Load, order_Transform, order_Load, time_Transform, time_Load, ftc_profit_Transform, ftc_profit_Load
 
 
 my_default_args = {
@@ -84,9 +84,16 @@ with DAG(
     )
 
     task13 = PythonOperator(
-        task_id='last',              
-        python_callable = upload_s3,
+        task_id='ftc_profit_Transform',              
+        python_callable = ftc_profit_Transform,
     )
+
+    task14 = PythonOperator(
+        task_id='ftc_profit_Load_redshift',              
+        python_callable = ftc_profit_Load,
+    )
+
+
 
     task1 >> task2
     
@@ -100,3 +107,5 @@ with DAG(
 
     [task4, task6, task8, task10, task12] >> task13
 
+
+    task13 >> task14
