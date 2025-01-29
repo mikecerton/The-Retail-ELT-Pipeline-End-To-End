@@ -1,0 +1,34 @@
+[2025-01-29T11:41:33.935+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-01-29T11:41:33.983+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: main_dag.location_Transform manual__2025-01-29T11:41:02.227708+00:00 [queued]>
+[2025-01-29T11:41:34.013+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: main_dag.location_Transform manual__2025-01-29T11:41:02.227708+00:00 [queued]>
+[2025-01-29T11:41:34.015+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 3
+[2025-01-29T11:41:34.094+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): location_Transform> on 2025-01-29 11:41:02.227708+00:00
+[2025-01-29T11:41:34.268+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=2167) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-01-29T11:41:34.285+0000] {standard_task_runner.py:72} INFO - Started process 2192 to run task
+[2025-01-29T11:41:34.281+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'main_dag', 'location_Transform', 'manual__2025-01-29T11:41:02.227708+00:00', '--job-id', '41', '--raw', '--subdir', 'DAGS_FOLDER/main_dag.py', '--cfg-path', '/tmp/tmpp5rztp03']
+[2025-01-29T11:41:34.296+0000] {standard_task_runner.py:105} INFO - Job 41: Subtask location_Transform
+[2025-01-29T11:41:34.708+0000] {task_command.py:467} INFO - Running <TaskInstance: main_dag.location_Transform manual__2025-01-29T11:41:02.227708+00:00 [running]> on host ae52aba2dca2
+[2025-01-29T11:41:35.276+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='itsMe!!' AIRFLOW_CTX_DAG_ID='main_dag' AIRFLOW_CTX_TASK_ID='location_Transform' AIRFLOW_CTX_EXECUTION_DATE='2025-01-29T11:41:02.227708+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-01-29T11:41:02.227708+00:00'
+[2025-01-29T11:41:35.341+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-01-29T11:41:44.758+0000] {job.py:229} INFO - Heartbeat recovered after 11.10 seconds
+[2025-01-29T11:41:45.089+0000] {logging_mixin.py:190} INFO - <class 'pandas.core.frame.DataFrame'>
+Index: 399 entries, 0 to 2563
+Data columns (total 5 columns):
+ #   Column       Non-Null Count  Dtype 
+---  ------       --------------  ----- 
+ 0   Postal Code  399 non-null    int64 
+ 1   Country      399 non-null    object
+ 2   Region       399 non-null    object
+ 3   State        399 non-null    object
+ 4   City         399 non-null    object
+dtypes: int64(1), object(4)
+memory usage: 18.7+ KB
+[2025-01-29T11:41:45.091+0000] {logging_mixin.py:190} INFO - None
+[2025-01-29T11:41:46.130+0000] {logging_mixin.py:190} INFO - !_upload_to_S3_complete_!
+[2025-01-29T11:41:46.136+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-01-29T11:41:46.185+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-01-29T11:41:46.188+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=main_dag, task_id=location_Transform, run_id=manual__2025-01-29T11:41:02.227708+00:00, execution_date=20250129T114102, start_date=20250129T114133, end_date=20250129T114146
+[2025-01-29T11:41:46.282+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-01-29T11:41:46.317+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -1,0 +1,33 @@
+[2025-01-29T16:22:58.661+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-01-29T16:22:58.704+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: main_dag.product_Transform manual__2025-01-29T16:22:08.198012+00:00 [queued]>
+[2025-01-29T16:22:58.721+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: main_dag.product_Transform manual__2025-01-29T16:22:08.198012+00:00 [queued]>
+[2025-01-29T16:22:58.722+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 3
+[2025-01-29T16:22:58.746+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): product_Transform> on 2025-01-29 16:22:08.198012+00:00
+[2025-01-29T16:22:58.765+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=2075) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-01-29T16:22:58.767+0000] {standard_task_runner.py:72} INFO - Started process 2105 to run task
+[2025-01-29T16:22:58.768+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'main_dag', 'product_Transform', 'manual__2025-01-29T16:22:08.198012+00:00', '--job-id', '96', '--raw', '--subdir', 'DAGS_FOLDER/main_dag.py', '--cfg-path', '/tmp/tmpxk0wtsoy']
+[2025-01-29T16:22:58.771+0000] {standard_task_runner.py:105} INFO - Job 96: Subtask product_Transform
+[2025-01-29T16:22:58.901+0000] {task_command.py:467} INFO - Running <TaskInstance: main_dag.product_Transform manual__2025-01-29T16:22:08.198012+00:00 [running]> on host ae52aba2dca2
+[2025-01-29T16:22:59.229+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='itsMe!!' AIRFLOW_CTX_DAG_ID='main_dag' AIRFLOW_CTX_TASK_ID='product_Transform' AIRFLOW_CTX_EXECUTION_DATE='2025-01-29T16:22:08.198012+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-01-29T16:22:08.198012+00:00'
+[2025-01-29T16:22:59.232+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-01-29T16:23:00.400+0000] {logging_mixin.py:190} INFO - <class 'pandas.core.frame.DataFrame'>
+Index: 1367 entries, 0 to 2579
+Data columns (total 4 columns):
+ #   Column        Non-Null Count  Dtype 
+---  ------        --------------  ----- 
+ 0   Product ID    1367 non-null   object
+ 1   Category      1367 non-null   object
+ 2   Sub-Category  1367 non-null   object
+ 3   Product Name  1367 non-null   object
+dtypes: object(4)
+memory usage: 53.4+ KB
+[2025-01-29T16:23:00.416+0000] {logging_mixin.py:190} INFO - None
+[2025-01-29T16:23:01.847+0000] {logging_mixin.py:190} INFO - !_upload_to_S3_complete_!
+[2025-01-29T16:23:01.850+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-01-29T16:23:01.888+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-01-29T16:23:01.889+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=main_dag, task_id=product_Transform, run_id=manual__2025-01-29T16:22:08.198012+00:00, execution_date=20250129T162208, start_date=20250129T162258, end_date=20250129T162301
+[2025-01-29T16:23:02.027+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-01-29T16:23:02.147+0000] {taskinstance.py:3900} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-01-29T16:23:02.153+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

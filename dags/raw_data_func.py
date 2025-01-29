@@ -1,6 +1,8 @@
 import os 
 import boto3
 from dotenv import load_dotenv
+import pandas as pd
+from io import StringIO
 
 def upload_s3():
 
@@ -14,11 +16,11 @@ def upload_s3():
 
     s3 = session.client('s3')
 
-    with open("/opt/airflow/my_data/online_retail_II.csv", "rb") as f:
+    with open("/opt/airflow/my_data/Demo_sales_data.csv", "rb") as f:
         s3.upload_fileobj(f, bucket_name, "my_retail_s3.csv")
     print("!_S3_upload_complete_onlineII.csv!")
 
-def download_s3():
+def download_s3_clean():
 
     load_dotenv("/opt/airflow/my_data/.env")
 
@@ -30,10 +32,20 @@ def download_s3():
 
     s3 = session.client('s3')
 
-
+    # get data from s3
     key = "my_retail_s3.csv"
-    download_path = "/opt/airflow/my_data/my_retail_s3.csv"
+    dest_path = "/opt/airflow/my_data/my_retail_s3.csv"
+    response = s3.get_object(Bucket=bucket_name, Key=key)
+    file_content = response['Body'].read().decode('utf-8')
 
-    s3.download_file(bucket_name, key, download_path)
+    # clean data
+    df = pd.read_csv(StringIO(file_content))
+    print(df.isnull().sum())
+    df = df.dropna()
+    print(df.duplicated().sum())
+    df = df.drop_duplicates()
+    df.to_csv(dest_path, index=False)
+
 
     print("!_S3_download_complete_my_retail_s3.csv!")
+    print(f"at {dest_path} !!!")

@@ -1,0 +1,22 @@
+[2025-01-29T11:41:34.638+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-01-29T11:41:34.723+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: main_dag.upload_s3 manual__2025-01-29T11:41:02.227708+00:00 [queued]>
+[2025-01-29T11:41:34.754+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: main_dag.upload_s3 manual__2025-01-29T11:41:02.227708+00:00 [queued]>
+[2025-01-29T11:41:34.755+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 3
+[2025-01-29T11:41:34.798+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): upload_s3> on 2025-01-29 11:41:02.227708+00:00
+[2025-01-29T11:41:34.893+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=2168) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-01-29T11:41:34.904+0000] {standard_task_runner.py:72} INFO - Started process 2198 to run task
+[2025-01-29T11:41:34.897+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'main_dag', 'upload_s3', 'manual__2025-01-29T11:41:02.227708+00:00', '--job-id', '45', '--raw', '--subdir', 'DAGS_FOLDER/main_dag.py', '--cfg-path', '/tmp/tmpfe_ttsqo']
+[2025-01-29T11:41:34.918+0000] {standard_task_runner.py:105} INFO - Job 45: Subtask upload_s3
+[2025-01-29T11:41:44.779+0000] {job.py:229} INFO - Heartbeat recovered after 10.51 seconds
+[2025-01-29T11:41:44.881+0000] {task_command.py:467} INFO - Running <TaskInstance: main_dag.upload_s3 manual__2025-01-29T11:41:02.227708+00:00 [running]> on host ae52aba2dca2
+[2025-01-29T11:41:45.598+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='itsMe!!' AIRFLOW_CTX_DAG_ID='main_dag' AIRFLOW_CTX_TASK_ID='upload_s3' AIRFLOW_CTX_EXECUTION_DATE='2025-01-29T11:41:02.227708+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-01-29T11:41:02.227708+00:00'
+[2025-01-29T11:41:45.608+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-01-29T11:41:47.869+0000] {logging_mixin.py:190} INFO - !_S3_upload_complete_onlineII.csv!
+[2025-01-29T11:41:47.874+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-01-29T11:41:47.906+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-01-29T11:41:47.908+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=main_dag, task_id=upload_s3, run_id=manual__2025-01-29T11:41:02.227708+00:00, execution_date=20250129T114102, start_date=20250129T114134, end_date=20250129T114147
+[2025-01-29T11:41:48.011+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-01-29T11:41:48.051+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-01-29T11:41:48.054+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

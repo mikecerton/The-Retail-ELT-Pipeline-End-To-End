@@ -1,0 +1,21 @@
+[2025-01-29T12:20:19.454+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-01-29T12:20:19.494+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: main_dag.product_Load_redshift manual__2025-01-29T12:17:16.105169+00:00 [queued]>
+[2025-01-29T12:20:19.514+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: main_dag.product_Load_redshift manual__2025-01-29T12:17:16.105169+00:00 [queued]>
+[2025-01-29T12:20:19.515+0000] {taskinstance.py:2865} INFO - Starting attempt 2 of 3
+[2025-01-29T12:20:19.537+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): product_Load_redshift> on 2025-01-29 12:17:16.105169+00:00
+[2025-01-29T12:20:19.568+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=2872) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-01-29T12:20:19.579+0000] {standard_task_runner.py:72} INFO - Started process 2877 to run task
+[2025-01-29T12:20:19.581+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'main_dag', 'product_Load_redshift', 'manual__2025-01-29T12:17:16.105169+00:00', '--job-id', '84', '--raw', '--subdir', 'DAGS_FOLDER/main_dag.py', '--cfg-path', '/tmp/tmp9u_4zxzy']
+[2025-01-29T12:20:19.590+0000] {standard_task_runner.py:105} INFO - Job 84: Subtask product_Load_redshift
+[2025-01-29T12:20:19.746+0000] {task_command.py:467} INFO - Running <TaskInstance: main_dag.product_Load_redshift manual__2025-01-29T12:17:16.105169+00:00 [running]> on host ae52aba2dca2
+[2025-01-29T12:20:19.954+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='itsMe!!' AIRFLOW_CTX_DAG_ID='main_dag' AIRFLOW_CTX_TASK_ID='product_Load_redshift' AIRFLOW_CTX_EXECUTION_DATE='2025-01-29T12:17:16.105169+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-01-29T12:17:16.105169+00:00'
+[2025-01-29T12:20:19.959+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-01-29T12:20:21.275+0000] {logging_mixin.py:190} INFO - Data loaded successfully into table!
+[2025-01-29T12:20:21.276+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-01-29T12:20:21.300+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-01-29T12:20:21.302+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=main_dag, task_id=product_Load_redshift, run_id=manual__2025-01-29T12:17:16.105169+00:00, execution_date=20250129T121716, start_date=20250129T122019, end_date=20250129T122021
+[2025-01-29T12:20:21.407+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-01-29T12:20:21.432+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-01-29T12:20:21.435+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -1,0 +1,31 @@
+[2025-01-29T10:54:15.820+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-01-29T10:54:15.881+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: main_dag.time_Transform manual__2025-01-29T10:53:39.199622+00:00 [queued]>
+[2025-01-29T10:54:15.899+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: main_dag.time_Transform manual__2025-01-29T10:53:39.199622+00:00 [queued]>
+[2025-01-29T10:54:15.901+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 3
+[2025-01-29T10:54:15.943+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): time_Transform> on 2025-01-29 10:53:39.199622+00:00
+[2025-01-29T10:54:16.010+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1486) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-01-29T10:54:16.016+0000] {standard_task_runner.py:72} INFO - Started process 1512 to run task
+[2025-01-29T10:54:16.016+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'main_dag', 'time_Transform', 'manual__2025-01-29T10:53:39.199622+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/main_dag.py', '--cfg-path', '/tmp/tmpu4wg9s07']
+[2025-01-29T10:54:16.042+0000] {standard_task_runner.py:105} INFO - Job 30: Subtask time_Transform
+[2025-01-29T10:54:16.581+0000] {task_command.py:467} INFO - Running <TaskInstance: main_dag.time_Transform manual__2025-01-29T10:53:39.199622+00:00 [running]> on host ae52aba2dca2
+[2025-01-29T10:54:17.048+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='itsMe!!' AIRFLOW_CTX_DAG_ID='main_dag' AIRFLOW_CTX_TASK_ID='time_Transform' AIRFLOW_CTX_EXECUTION_DATE='2025-01-29T10:53:39.199622+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-01-29T10:53:39.199622+00:00'
+[2025-01-29T10:54:17.080+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-01-29T10:54:18.213+0000] {logging_mixin.py:190} INFO - <class 'pandas.core.frame.DataFrame'>
+Index: 638 entries, 0 to 2586
+Data columns (total 3 columns):
+ #   Column         Non-Null Count  Dtype 
+---  ------         --------------  ----- 
+ 0   Customer ID    638 non-null    object
+ 1   Customer Name  638 non-null    object
+ 2   Segment        638 non-null    object
+dtypes: object(3)
+memory usage: 19.9+ KB
+[2025-01-29T10:54:18.220+0000] {logging_mixin.py:190} INFO - None
+[2025-01-29T10:54:18.876+0000] {logging_mixin.py:190} INFO - !_upload_to_S3_complete_!
+[2025-01-29T10:54:18.887+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-01-29T10:54:18.938+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-01-29T10:54:18.941+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=main_dag, task_id=time_Transform, run_id=manual__2025-01-29T10:53:39.199622+00:00, execution_date=20250129T105339, start_date=20250129T105415, end_date=20250129T105418
+[2025-01-29T10:54:19.116+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-01-29T10:54:19.229+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

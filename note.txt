@@ -1,5 +1,5 @@
 -- Create the fact table
-CREATE TABLE fact_sales (
+CREATE TABLE fact_profit_rep (
     sale_id BIGINT IDENTITY(1, 1) PRIMARY KEY,
     order_id VARCHAR(20) NOT NULL,
     product_id VARCHAR(20) NOT NULL,
@@ -9,18 +9,25 @@ CREATE TABLE fact_sales (
     profit DECIMAL(10, 2),
     quantity INTEGER,
     discount DECIMAL(5, 2),
-    ship_mode VARCHAR(50),       -- Ship Mode from dim_orders
-    segment VARCHAR(50),         -- Segment from dim_customers
-    state VARCHAR(50),           -- State from dim_regions
-    region VARCHAR(50),          -- Region from dim_regions
-    category VARCHAR(50),        -- Category from dim_products
-    sub_category VARCHAR(50),    -- Sub-Category from dim_products,
+    //segment VARCHAR(50),         -- Segment from dim_customers
+    //state VARCHAR(50),           -- State from dim_locations
+    //region VARCHAR(50),          -- Region from dim_locations
+    //category VARCHAR(50),        -- Category from dim_products
     FOREIGN KEY (order_id) REFERENCES dim_orders(order_id),
     FOREIGN KEY (product_id) REFERENCES dim_products(product_id),
     FOREIGN KEY (customer_id) REFERENCES dim_customers(customer_id),
     FOREIGN KEY (region_id) REFERENCES dim_regions(region_id)
 );
 
+CREATE TABLE dim_time (
+    time_id VARCHAR(255) NOT NULL PRIMARY KEY,
+    fulldate TIMESTAMP NOT NULL,
+    year INT NOT NULL,
+    month INT NOT NULL,
+    day INT NOT NULL,
+    hour INT NOT NULL,
+    minute INT NOT NULL
+);
 
 -- Create the orders dimension table
 CREATE TABLE dim_orders (
@@ -45,12 +52,51 @@ CREATE TABLE dim_products (
     product_name VARCHAR(255)
 );
 
--- Create the regions dimension table
-CREATE TABLE dim_regions (
-    region_id INTEGER IDENTITY(1, 1) PRIMARY KEY,
-    region VARCHAR(50),
-    country VARCHAR(50),
-    state VARCHAR(50),
-    city VARCHAR(100),
-    postal_code VARCHAR(10)
+CREATE TABLE dim_locations (
+    postal_code INT PRIMARY KEY,
+    country VARCHAR(50) NOT NULL,
+    region VARCHAR(50) NOT NULL,
+    state VARCHAR(50) NOT NULL,
+    city VARCHAR(100) NOT NULL
 );
+
+
+
+
+ 0   Row ID         2587 non-null   int64  
+ 1   Order ID       2587 non-null   object 
+ 2   Order Date     2587 non-null   object 
+ 3   Ship Date      2587 non-null   object 
+ 4   Ship Mode      2587 non-null   object 
+
+ 5   Customer ID    2587 non-null   object 
+ 6   Customer Name  2587 non-null   object 
+ 7   Segment        2587 non-null   object 
+
+ 8   Country        2587 non-null   object 
+ 9   City           2587 non-null   object 
+ 10  State          2587 non-null   object 
+ 11  Postal Code    2587 non-null   int64  
+ 12  Region         2587 non-null   object 
+
+ 13  Product ID     2587 non-null   object 
+ 14  Category       2587 non-null   object 
+ 15  Sub-Category   2587 non-null   object 
+ 16  Product Name   2587 non-null   object 
+
+ 17  Sales          2587 non-null   float64
+ 18  Quantity       2587 non-null   int64  
+ 19  Discount       2587 non-null   float64
+ 20  Profit         2587 non-null   float64
+
+
+
+     # task1 >> task2 >> [[task3 >> task4], [task5 >> task6], [task7 >> task8]] >> task9 >> task10
+
+    # task1 >> task2 
+    # task2 >> [task3, task5, task7]  # Split into parallel tasks
+    # task3 >> task4  # Product transform and load
+    # task5 >> task6  # Customer transform and load
+    # task7 >> task8  # Time transform and load
+    # [task4, task6, task8] >> task9  # Merge back for sale transform
+    # task9 >> task10  # Sale load to Redshift

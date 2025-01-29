@@ -78,7 +78,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - ${AIRFLOW_PROJ_DIR:-.}/my_data:/opt/airflow/my_data
-    - ${AIRFLOW_PROJ_DIR:-.}/.env:/opt/airflow/.env
+    - ${AIRFLOW_PROJ_DIR:-.}/my_data/.env:/opt/airflow/.env
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
