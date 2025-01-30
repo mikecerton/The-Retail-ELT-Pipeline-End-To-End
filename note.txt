@@ -1,22 +1,24 @@
 -- Create the fact table
 CREATE TABLE fact_profit_rep (
     sale_id BIGINT IDENTITY(1, 1) PRIMARY KEY,
+    time_id VARCHAR(255) NOT NULL,
     order_id VARCHAR(20) NOT NULL,
-    product_id VARCHAR(20) NOT NULL,
     customer_id VARCHAR(20) NOT NULL,
-    region_id INTEGER NOT NULL,
+    product_id VARCHAR(20) NOT NULL,
+    postal_code INT NOT NULL,
     sales DECIMAL(10, 2),
     profit DECIMAL(10, 2),
     quantity INTEGER,
     discount DECIMAL(5, 2),
-    //segment VARCHAR(50),         -- Segment from dim_customers
-    //state VARCHAR(50),           -- State from dim_locations
-    //region VARCHAR(50),          -- Region from dim_locations
-    //category VARCHAR(50),        -- Category from dim_products
+    segment VARCHAR(50),         
+    state VARCHAR(50),           
+    region VARCHAR(50),          
+    category VARCHAR(50),
+    FOREIGN KEY (time_id) REFERENCES dim_time(time_id),        
     FOREIGN KEY (order_id) REFERENCES dim_orders(order_id),
     FOREIGN KEY (product_id) REFERENCES dim_products(product_id),
     FOREIGN KEY (customer_id) REFERENCES dim_customers(customer_id),
-    FOREIGN KEY (region_id) REFERENCES dim_regions(region_id)
+    FOREIGN KEY (postal_code) REFERENCES dim_locations(postal_code)
 );
 
 CREATE TABLE dim_time (
@@ -91,7 +93,7 @@ CREATE TABLE dim_locations (
 
 
 
-     # task1 >> task2 >> [[task3 >> task4], [task5 >> task6], [task7 >> task8]] >> task9 >> task10
+     # task1 >> task2 >> [[task3 >> task4], [task5 >> task6], [task7 >> task8], [task9 >> task10], [task11 >> task12]] >> task13
 
     # task1 >> task2 
     # task2 >> [task3, task5, task7]  # Split into parallel tasks
