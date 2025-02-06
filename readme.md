@@ -44,7 +44,11 @@ docker run --rm "debian:bookworm-slim" bash -c "numfmt --to iec $(echo $(($(getc
 git clone https://github.com/mikecerton/The-Retail-ELT-Pipeline-End-To-End-project.git
 cd The-Retail-ELT-Pipeline-End-To-End-project
 ```
-3. put you data into .env file like this
+3. Run mkdir to create directories: logs, plugins, and config.
+```bash
+mkdir logs, plugins, config
+```
+4. put you data into .env file like this
 ```bash
 AIRFLOW_UID=50000
 
@@ -60,15 +64,15 @@ redshift_user = your redshift_user
 redshift_password = your redshift_password
 iam_role = your iam_role
 ```
-4. run (airflow-init)
+5. run (airflow-init)
 ```bash
 docker-compose up airflow-init
 ```
-5. run (start docker-compose)
+6. run (start docker-compose)
 ```bash
 docker-compose up
 ```
-6. you can start activate dag at http://localhost:8080
+7. you can start activate dag at http://localhost:8080
 
 ## Disclaimer
 - airflow : <br>
