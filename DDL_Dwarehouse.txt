@@ -1,5 +1,48 @@
+-- Create the time dimension table
+CREATE TABLE IF NOT EXISTS dim_time (
+    time_id VARCHAR(255) NOT NULL PRIMARY KEY,
+    fulldate TIMESTAMP NOT NULL,
+    year INT NOT NULL,
+    month INT NOT NULL,
+    day INT NOT NULL,
+    hour INT NOT NULL,
+    minute INT NOT NULL
+);
+
+-- Create the orders dimension table
+CREATE TABLE IF NOT EXISTS dim_orders (
+    order_id VARCHAR(20) PRIMARY KEY,
+    order_date DATE NOT NULL,
+    ship_date DATE NOT NULL,
+    ship_mode VARCHAR(50)
+);
+
+-- Create the customers dimension table
+CREATE TABLE IF NOT EXISTS dim_customers (
+    customer_id VARCHAR(20) PRIMARY KEY,
+    customer_name VARCHAR(100),
+    segment VARCHAR(50)
+);
+
+-- Create the products dimension table
+CREATE TABLE IF NOT EXISTS dim_products (
+    product_id VARCHAR(20) PRIMARY KEY,
+    category VARCHAR(50),
+    sub_category VARCHAR(50),
+    product_name VARCHAR(255)
+);
+
+-- Create the locations dimension table
+CREATE TABLE IF NOT EXISTS dim_locations (
+    postal_code INT PRIMARY KEY,
+    country VARCHAR(50) NOT NULL,
+    region VARCHAR(50) NOT NULL,
+    state VARCHAR(50) NOT NULL,
+    city VARCHAR(100) NOT NULL
+);
+
 -- Create the fact table
-CREATE TABLE fact_profit_rep (
+CREATE TABLE IF NOT EXISTS fact_profit_rep (
     sale_id BIGINT IDENTITY(1, 1) PRIMARY KEY,
     time_id VARCHAR(255) NOT NULL,
     order_id VARCHAR(20) NOT NULL,
@@ -20,85 +63,3 @@ CREATE TABLE fact_profit_rep (
     FOREIGN KEY (customer_id) REFERENCES dim_customers(customer_id),
     FOREIGN KEY (postal_code) REFERENCES dim_locations(postal_code)
 );
-
-CREATE TABLE dim_time (
-    time_id VARCHAR(255) NOT NULL PRIMARY KEY,
-    fulldate TIMESTAMP NOT NULL,
-    year INT NOT NULL,
-    month INT NOT NULL,
-    day INT NOT NULL,
-    hour INT NOT NULL,
-    minute INT NOT NULL
-);
-
--- Create the orders dimension table
-CREATE TABLE dim_orders (
-    order_id VARCHAR(20) PRIMARY KEY,
-    order_date DATE NOT NULL,
-    ship_date DATE NOT NULL,
-    ship_mode VARCHAR(50)
-);
-
--- Create the customers dimension table
-CREATE TABLE dim_customers (
-    customer_id VARCHAR(20) PRIMARY KEY,
-    customer_name VARCHAR(100),
-    segment VARCHAR(50)
-);
-
--- Create the products dimension table
-CREATE TABLE dim_products (
-    product_id VARCHAR(20) PRIMARY KEY,
-    category VARCHAR(50),
-    sub_category VARCHAR(50),
-    product_name VARCHAR(255)
-);
-
-CREATE TABLE dim_locations (
-    postal_code INT PRIMARY KEY,
-    country VARCHAR(50) NOT NULL,
-    region VARCHAR(50) NOT NULL,
-    state VARCHAR(50) NOT NULL,
-    city VARCHAR(100) NOT NULL
-);
-
-
-
-
- 0   Row ID         2587 non-null   int64  
- 1   Order ID       2587 non-null   object 
- 2   Order Date     2587 non-null   object 
- 3   Ship Date      2587 non-null   object 
- 4   Ship Mode      2587 non-null   object 
-
- 5   Customer ID    2587 non-null   object 
- 6   Customer Name  2587 non-null   object 
- 7   Segment        2587 non-null   object 
-
- 8   Country        2587 non-null   object 
- 9   City           2587 non-null   object 
- 10  State          2587 non-null   object 
- 11  Postal Code    2587 non-null   int64  
- 12  Region         2587 non-null   object 
-
- 13  Product ID     2587 non-null   object 
- 14  Category       2587 non-null   object 
- 15  Sub-Category   2587 non-null   object 
- 16  Product Name   2587 non-null   object 
-
- 17  Sales          2587 non-null   float64
- 18  Quantity       2587 non-null   int64  
- 19  Discount       2587 non-null   float64
- 20  Profit         2587 non-null   float64
-
-
-
-     # task1 >> task2 >> [[task3 >> task4], [task5 >> task6], [task7 >> task8], [task9 >> task10], [task11 >> task12]] >> task13
-
-    # task1 >> task2 
-    # task2 >> [task3, task5, task7]  # Split into parallel tasks
-    # task3 >> task4  # Product transform and load
-    # task5 >> task6  # Customer transform and load
-    # task7 >> task8  # Time transform and load
-    # [task4, task6, task8] >> task9  # Merge back for sale transform
-    # task9 >> task10  # Sale load to Redshift
