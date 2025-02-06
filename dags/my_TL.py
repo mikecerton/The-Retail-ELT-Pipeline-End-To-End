@@ -9,7 +9,7 @@ from io import StringIO
 
 def upload_s3(my_Fname, csv_buffer):
 
-    load_dotenv("/opt/airflow/my_data/.env")
+    load_dotenv("/opt/airflow/.env")
 
     bucket_name = os.getenv("bucket_name")
     session = boto3.Session(
@@ -24,7 +24,7 @@ def upload_s3(my_Fname, csv_buffer):
 
 def upload_redshift(my_Fname, table_name, sql_table):
 
-    load_dotenv("/opt/airflow/my_data/.env")
+    load_dotenv("/opt/airflow/.env")
 
     bucket_name = os.getenv("bucket_name")
 
