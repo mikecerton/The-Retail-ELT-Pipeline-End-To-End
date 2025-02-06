@@ -6,7 +6,7 @@ from io import StringIO
 
 def upload_s3():
 
-    load_dotenv("/opt/airflow/my_data/.env")
+    load_dotenv("/opt/airflow/.env")
 
     bucket_name = os.getenv("bucket_name")
     session = boto3.Session(
@@ -22,7 +22,7 @@ def upload_s3():
 
 def download_s3_clean():
 
-    load_dotenv("/opt/airflow/my_data/.env")
+    load_dotenv("/opt/airflow/.env")
 
     bucket_name = os.getenv("bucket_name")
     session = boto3.Session(
