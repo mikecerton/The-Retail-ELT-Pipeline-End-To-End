@@ -82,3 +82,5 @@ docker-compose up
 &emsp;https://docs.aws.amazon.com/redshift/ <br>
 &emsp;https://www.youtube.com/watch?v=WAjPQZ8Osmg&list=LL&index=14&t=2947s <br>
 &emsp;https://www.youtube.com/watch?v=7r2z3Qn3Qz8&list=LL&index=27&t=1672s
+- Other : <br>
+&emsp;https://www.geeksforgeeks.org/introduction-to-psycopg2-module-in-python/
