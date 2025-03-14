@@ -18,12 +18,6 @@ I use Looker Studio to create dashboards using data from the data warehouse.
 #### A special note
 While developing this project, I connected Looker Studio to AWS Redshift for data. However, due to AWS free tier limits, Redshift cannot run continuously. As a result, the dashboard now uses data from a CSV file exported from Redshift, but it appears the same as when directly connected to Redshift.
 
-### Data Warehouse
-<img src="readme_pic/datawarehouse_pic.png" alt="DataWarehouse" width="600">
-
-### DAG
-<img src="readme_pic/dag_pic.png" alt="DAG" width="600">
-
 ## Tools & Technologies
 - Cloud - Amazon Web Services (AWS) <br>
 - Containerization - Docker, Docker Compose <br>
@@ -33,6 +27,12 @@ While developing this project, I connected Looker Studio to AWS Redshift for dat
 - Data Warehouse - AWS Redshift <br>
 - Data Visualization - Looker Studio <br>
 - Language - Python <br>
+
+### Data Warehouse
+<img src="readme_pic/datawarehouse_pic.png" alt="DataWarehouse" width="600">
+
+### DAG
+<img src="readme_pic/dag_pic.png" alt="DAG" width="600">
 
 ## Set up
 1. Check that your Docker has more than 4 GB of RAM. (to use airflow)
