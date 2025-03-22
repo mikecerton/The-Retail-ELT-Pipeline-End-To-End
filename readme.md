@@ -1,7 +1,7 @@
 # The-Retail-ELT-Pipeline-End-To-End
 ## Overview
-&emsp;The goal of this project is to design and implement an ETL data pipeline that ingests raw retail data, processes it, and stores it in a data warehouse for analysis and visualization. The pipeline is orchestrated using Apache Airflow, hosted locally with Docker Compose. AWS S3 serves as the data lake, while AWS Redshift functions as the data warehouse. Finally, the processed data is visualized using Looker Studio for insights and reporting. <br>
-!! You can view the dashboard [here. ](https://lookerstudio.google.com/reporting/0ef16b84-55f2-47dc-afd0-f62f6d1a8bd4)!! <br>
+&emsp;UserInsight-Streaming-Data-Pipeline is a real-time data processing pipeline that ingests data from an API, processes it using Apache Kafka and Apache Spark, stores it in Amazon S3 and Amazon Redshift, and visualizes insights using Looker. The pipeline components, including Kafka and Spark, can be installed using Docker for ease of deployment. <br>
+!! You can view the dashboard(update pleaseeeeeeee!!!!!!!!) [here. ](https://lookerstudio.google.com/reporting/0ef16b84-55f2-47dc-afd0-f62f6d1a8bd4)!! <br>
 ## Architecture
 <img src="readme_pic/architecture_pic.jpg" alt="Architecture" width="800">
 1. Upload raw data to AWS S3 (data lake) to handle data from multiple sources.<br>
