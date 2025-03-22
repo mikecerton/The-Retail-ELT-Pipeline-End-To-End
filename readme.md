@@ -35,20 +35,20 @@ While developing this project, I connected Looker Studio to AWS Redshift for dat
 - Language - Python <br>
 
 ## Set up
-1. Check that your Docker has more than 4 GB of RAM. (to use airflow)
+#### 1. Check that your Docker has more than 4 GB of RAM. (to use airflow)
 ```bash
 docker run --rm "debian:bookworm-slim" bash -c "numfmt --to iec $(echo $(($(getconf _PHYS_PAGES) * $(getconf PAGE_SIZE))))"
 ```
-2. clone this github repository
+#### 2. clone this github repository
 ```bash
 git clone https://github.com/mikecerton/The-Retail-ELT-Pipeline-End-To-End-project.git
 cd The-Retail-ELT-Pipeline-End-To-End-project
 ```
-3. Run mkdir to create directories: logs, plugins, and config.
+#### 3. Run mkdir to create directories: logs, plugins, and config.
 ```bash
 mkdir logs, plugins, config
 ```
-4. put you data into .env file like this
+#### 4. put you data into .env file like this
 ```bash
 AIRFLOW_UID=50000
 
@@ -64,15 +64,16 @@ redshift_user = your redshift_user
 redshift_password = your redshift_password
 iam_role = your iam_role
 ```
-5. run (airflow-init)
+#### 5. run (airflow-init)
 ```bash
 docker-compose up airflow-init
 ```
-6. run (start docker-compose)
+#### 6. run (start docker-compose)
 ```bash
 docker-compose up
 ```
-7. you can start activate dag at http://localhost:8080
+#### 7. you can start activate dag at <br>
+http://localhost:8080
 
 ## Disclaimer
 - airflow : <br>
