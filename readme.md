@@ -75,6 +75,24 @@ docker-compose up
 #### 7. you can start activate dag at <br>
 http://localhost:8080
 
+### Explain Path <br>
+```bash
+1. Full architecture
+2. docker-compose.yaml
+   - Mainly its Airflow Docker Compose and also pip install pandas, etc.
+3. dag/main_dag.py
+   - Defines the DAG here.
+4. dag/my_TL.py
+   - Contains functions to transform data and load it to AWS Redshift (data warehouse).
+5. dag/raw_data_function.py
+   - Contains functions to upload and download data from AWS S3 (data lake).
+6. Pull data from Redshift to create a dashboard at Google Looker Studio.
+
+!!!!! Note: This data only covers the period from 01/01/2021 to 31/12/2021.
+!!!!! If you selected a date range other than this, the graph will show NULL.
+
+```
+
 ## Disclaimer
 - airflow : <br>
 &emsp;https://github.com/mikecerton/Apache_Airflow_Tutorial <br>
