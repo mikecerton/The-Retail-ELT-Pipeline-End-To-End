@@ -6,7 +6,9 @@ import boto3
 import psycopg2
 from io import StringIO
 
-# upload data to S3
+# ----------------------------
+# Function: upload data to S3
+# ----------------------------
 def upload_s3(my_Fname, csv_buffer):
     
     # Load variables from .env file
@@ -25,7 +27,9 @@ def upload_s3(my_Fname, csv_buffer):
     s3.put_object(Bucket=bucket_name, Key=my_Fname, Body=csv_buffer.getvalue())
     print(f"!_S3_upload_complete_{my_Fname}!")
 
-# copy data from S3 to data warehouse in Redshift
+# ----------------------------
+# Function: copy data from S3 to data warehouse in Redshift
+# ----------------------------
 def upload_redshift(my_Fname, table_name, sql_table):
 
     # Load variables from .env file
@@ -67,7 +71,9 @@ def upload_redshift(my_Fname, table_name, sql_table):
     cursor.close()
     conn.close()
 
-# ETL for dim_locations
+# ----------------------------
+# Function: ETL for dim_locations
+# ----------------------------
 def location_Transform_Load():
 
     my_Fname = "location_data.csv"        
@@ -91,7 +97,9 @@ def location_Transform_Load():
     upload_s3(my_Fname, csv_buffer)
     upload_redshift(my_Fname, "dim_locations", sql_table)
 
-# ETL for dim_products
+# ----------------------------
+# Function: ETL for dim_products
+# ----------------------------
 def product_Transform_Load():
 
     my_Fname = "product_data.csv"       
@@ -114,7 +122,9 @@ def product_Transform_Load():
     upload_s3(my_Fname, csv_buffer)
     upload_redshift(my_Fname, "dim_products", sql_table)
 
-# ETL for dim_customers
+# ----------------------------
+# Function: ETL for dim_customers
+# ----------------------------
 def customer_Transform_Load():
 
     my_Fname = "customer_data.csv"       
@@ -136,7 +146,9 @@ def customer_Transform_Load():
     upload_s3(my_Fname, csv_buffer)
     upload_redshift(my_Fname, "dim_customers", sql_table)
 
-# ETL for dim_orders
+# ----------------------------
+# Function: ETL for dim_orders
+# ----------------------------
 def order_Transform_Load():
 
     my_Fname = "order_data.csv"         
@@ -161,7 +173,9 @@ def order_Transform_Load():
     upload_s3(my_Fname, csv_buffer)
     upload_redshift(my_Fname, "dim_orders", sql_table)
 
-# ETL for dim_time    
+# ----------------------------
+# Function: ETL for dim_time 
+# ----------------------------
 def time_Transform_Load():
 
     my_Fname = "time_data.csv"         
@@ -197,7 +211,9 @@ def time_Transform_Load():
     upload_s3(my_Fname, csv_buffer)
     upload_redshift(my_Fname, "dim_time", sql_table)
 
-# ETL for fact_profit_rep
+# ----------------------------
+# Function: ETL for fact_profit_rep
+# ----------------------------
 def ftc_profit_Transform_Load():
 
     my_Fname = "ftc_profit_data.csv"         

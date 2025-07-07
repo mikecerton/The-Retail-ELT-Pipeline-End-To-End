@@ -4,7 +4,9 @@ from dotenv import load_dotenv
 import pandas as pd
 from io import StringIO
 
-# upload raw and unclean csv to s3
+# ----------------------------
+# Function: upload raw and unclean csv to s3
+# ----------------------------
 def upload_s3():
 
     # Load variables from .env file
@@ -24,7 +26,9 @@ def upload_s3():
         s3.upload_fileobj(f, bucket_name, "my_retail_s3.csv")
     print("!_S3_upload_complete_onlineII.csv!")
 
-# download unclean csv data from S3 and clean this csv
+# ----------------------------
+# Function: download unclean csv data from S3 and clean this csv
+# ----------------------------
 def download_s3_clean():
 
     # Load variables from .env file
