@@ -30,7 +30,7 @@ with DAG(
     )
 
     # step 2: Download raw data from S3 and clean it
-    download_s3 = PythonOperator(
+    download_s3_and_clean = PythonOperator(
         task_id='download_s3_clean',
         python_callable = download_s3_clean,
     )
@@ -71,4 +71,4 @@ with DAG(
         python_callable = ftc_profit_Transform_Load,
     )
 
-    up_s3 >> download_s3 >> [dim_location_Load, dim_product_Load, dim_customer_Load, dim_order_Load, dim_time_Load] >> ftc_profit_Load
+    up_s3 >> download_s3_and_clean >> [dim_location_Load, dim_product_Load, dim_customer_Load, dim_order_Load, dim_time_Load] >> ftc_profit_Load
