@@ -13,6 +13,7 @@ my_default_args = {
     'retry_delay': timedelta(minutes=2)
 }
 
+# Define the DAG
 with DAG(
     dag_id = 'main_dag',
     description = 'data engineer project',
@@ -22,41 +23,49 @@ with DAG(
     catchup = False,
 ) as dag:
 
+    # step 1: Upload raw data to S3
     up_s3 = PythonOperator(
         task_id='upload_s3',
         python_callable = upload_s3,
     )
 
+    # step 2: Download raw data from S3 and clean it
     download_s3 = PythonOperator(
         task_id='download_s3_clean',
         python_callable = download_s3_clean,
     )
 
+    # step 3: Transform and load 'location' dimension 
     dim_location_Load = PythonOperator(
         task_id='location_Transform_Load',               
         python_callable = location_Transform_Load,
     )
 
+    # step 4: Transform and load 'product' dimension 
     dim_product_Load = PythonOperator(
         task_id='product_Transform_Load',              
         python_callable = product_Transform_Load,
     )
 
+    # step 5: Transform and load 'customer' dimension 
     dim_customer_Load = PythonOperator(
         task_id='customer_Transform_Load',              
         python_callable = customer_Transform_Load,
     )
 
+     # step 6: Transform and load 'order' dimension 
     dim_order_Load = PythonOperator(
         task_id='order_Transform_Load',              
         python_callable = order_Transform_Load,
     )
 
+    # step 7: Transform and load 'time' dimension 
     dim_time_Load = PythonOperator(
         task_id='time_Transform_Load',              
         python_callable = time_Transform_Load,
     )
 
+    # step 8: Transform and load fact table for profit report
     ftc_profit_Load = PythonOperator(
         task_id='ftc_profit_Transform_Load',              
         python_callable = ftc_profit_Transform_Load,

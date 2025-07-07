@@ -8,7 +8,7 @@ from io import StringIO
 
 
 def upload_s3(my_Fname, csv_buffer):
-
+    
     load_dotenv("/opt/airflow/.env")
 
     bucket_name = os.getenv("bucket_name")
@@ -154,7 +154,6 @@ def order_Transform_Load():
     upload_s3(my_Fname, csv_buffer)
 
     upload_redshift(my_Fname, "dim_orders", sql_table)
-
 
 def time_Transform_Load():
 
