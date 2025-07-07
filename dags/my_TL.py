@@ -9,7 +9,7 @@ from io import StringIO
 # upload data to S3
 def upload_s3(my_Fname, csv_buffer):
     
-    # Load data from .env file
+    # Load variables from .env file
     load_dotenv("/opt/airflow/.env")
 
     # connect to s3
@@ -28,7 +28,7 @@ def upload_s3(my_Fname, csv_buffer):
 # copy data from S3 to data warehouse in Redshift
 def upload_redshift(my_Fname, table_name, sql_table):
 
-    # Load data from .env file
+    # Load variables from .env file
     load_dotenv("/opt/airflow/.env")
 
     bucket_name = os.getenv("bucket_name")
