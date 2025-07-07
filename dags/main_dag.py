@@ -22,44 +22,44 @@ with DAG(
     catchup = False,
 ) as dag:
 
-    task1 = PythonOperator(
+    up_s3 = PythonOperator(
         task_id='upload_s3',
         python_callable = upload_s3,
     )
 
-    task2 = PythonOperator(
+    download_s3 = PythonOperator(
         task_id='download_s3_clean',
         python_callable = download_s3_clean,
     )
 
-    task3 = PythonOperator(
+    dim_location_Load = PythonOperator(
         task_id='location_Transform_Load',               
         python_callable = location_Transform_Load,
     )
 
-    task4 = PythonOperator(
+    dim_product_Load = PythonOperator(
         task_id='product_Transform_Load',              
         python_callable = product_Transform_Load,
     )
 
-    task5 = PythonOperator(
+    dim_customer_Load = PythonOperator(
         task_id='customer_Transform_Load',              
         python_callable = customer_Transform_Load,
     )
 
-    task6 = PythonOperator(
+    dim_order_Load = PythonOperator(
         task_id='order_Transform_Load',              
         python_callable = order_Transform_Load,
     )
 
-    task7 = PythonOperator(
+    dim_time_Load = PythonOperator(
         task_id='time_Transform_Load',              
         python_callable = time_Transform_Load,
     )
 
-    task8 = PythonOperator(
+    ftc_profit_Load = PythonOperator(
         task_id='ftc_profit_Transform_Load',              
         python_callable = ftc_profit_Transform_Load,
     )
 
-    task1 >> task2 >> [task3, task4, task5, task6, task7] >> task8
+    up_s3 >> download_s3 >> [dim_location_Load, dim_product_Load, dim_customer_Load, dim_order_Load, dim_time_Load] >> ftc_profit_Load
